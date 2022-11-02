@@ -1,32 +1,74 @@
 package pl.macieksob.rentCar.security;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import pl.macieksob.rentCar.model.Role;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 
 public class SignupRequest {
-    @NotBlank
-    @Size(min = 3, max = 20)
-    private String username;
 
-    @NotBlank
-    @Size(max = 50)
-    @Email
-    private String email;
+
 
     private Set<String> role;
 
-    @NotBlank
-    @Size(min = 6, max = 40)
+
+    @NotBlank(message = "Pole nie może byc puste!")
+    private String name;
+
+
+    @NotBlank(message = "Pole nie może byc puste!")
+    private String surname;
+
+    @Email
+    @NotBlank(message = "Pole nie może byc puste!")
+    private String email;
+
+    @NotBlank(message = "Pole nie może byc puste!")
+    private String postCode;
+
+    @NotBlank(message = "Pole nie może byc puste!")
+//    @Pattern(regexp = "[a-z]+([ -][A-Z][a-z]+)?")
+    private String city;
+
+    @NotBlank(message = "Pole nie może byc puste!")
+
+//    @Pattern(regexp = "\\d{9}")
+    private String phoneNumber;
+
+    @NotBlank(message = "Pole nie może byc puste!")
+
+    private String street;
+
+    @NotBlank(message = "Pole nie może byc puste!")
+
+//    @Pattern(regexp = "\\\\d+[A-Z]?\\\\\\\\\\\\d+[A-Z]?")
+    private String numberOfStreet;
+
+    @Min(1)
+    @NotNull(message = "Pole nie może byc puste")
+    private Integer numberOfFlat;
+
+    @NotBlank(message = "Pole nie może byc puste!")
+
+
+//    @Pattern(regexp = "\"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$\"")
     private String password;
 
-    public String getUsername() {
-        return username;
-    }
+    @NotBlank(message = "Pole nie może byc puste!")
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @Size(min=11,max = 11,message = "Pole ma nieprawidłową ilość znaków")
+    private String pesel;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate dateOfBirth;
+
+    private Collection<Role> roles;
 
     public String getEmail() {
         return email;

@@ -22,9 +22,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User with username: "+username + "not found"));
-        Collection< SimpleGrantedAuthority > authorities = new ArrayList<>();
-        user.getRoles().forEach(role ->
-                authorities.add(new SimpleGrantedAuthority(role.getName())));
-        return new CustomUserDetails(user.getId(), user.getEmail(),user.getPassword(),authorities);
+        System.out.println(user.isAccountNonLocked());
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            user.getRoles().forEach(role ->
+                    authorities.add(new SimpleGrantedAuthority(role.getName())));
+            return new CustomUserDetails(user.getId(), user.getEmail(), user.getPassword(), authorities);
+
     }
 }

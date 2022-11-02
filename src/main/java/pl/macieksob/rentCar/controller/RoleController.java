@@ -16,11 +16,11 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @PostMapping("/newRole")
-    public String addRole(@RequestBody @Valid RoleDTO role){
+    @RequestMapping(value = "/newRole",method=RequestMethod.POST)
+    public void addRole(@RequestBody @Valid RoleDTO role){
         roleService.addRole(role);
 
-        return "";
+
     }
 
     @GetMapping
@@ -28,31 +28,29 @@ public class RoleController {
         return roleService.getRoles();
     }
 
-    @PutMapping("/editRole/{id}")
-    public String editRole(@PathVariable Long id, @RequestBody RoleDTO newRole){
+    @RequestMapping(value = "/editRole/{id}",method=RequestMethod.DELETE)
+    public void editRole(@PathVariable Long id, @RequestBody RoleDTO newRole){
         roleService.editRole(id, newRole);
 
-        return "";
     }
 
-    @DeleteMapping("/deleteRole/{id}")
-    public String deleteRole(@PathVariable Long id){
+    @RequestMapping(value = "/deleteRole/{id}",method=RequestMethod.DELETE)
+    public void deleteRole(@PathVariable Long id){
         roleService.deleteRoleById(id);
 
-        return "";
+
     }
 
-    @DeleteMapping("/deleteRole")
-    public String deleteRole(@RequestBody RoleDTO role){
+    @RequestMapping(value = "/deleteRole",method=RequestMethod.DELETE)
+    public void deleteRole(@RequestBody RoleDTO role){
         roleService.deleteRole(role);
 
-        return "";
     }
 
     @GetMapping("/{id}")
-    public String getRole(@PathVariable Long id){
-        roleService.getRole(id);
+    public RoleDTO getRole(@PathVariable Long id){
+        return roleService.getRole(id);
 
-        return "";
+
     }
 }

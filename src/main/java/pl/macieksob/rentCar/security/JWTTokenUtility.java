@@ -14,7 +14,7 @@ public class JWTTokenUtility {
 
     private static final long EXPIRE_DURATION = 24 * 60 * 60 * 1000;
 
-    @Value("${app.jwt.secretKey}")
+//    @Value("${app.jwt.secretKey}")
     private String secretKey;
 
 

@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -45,18 +46,18 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Pole nie może byc puste!")
     @Column(nullable = false)
-    @Pattern(regexp = "\\d{2}-\\d{3}")
+//    @Pattern(regexp = "\\d{2}-\\d{3}")
     private String postCode;
 
     @NotBlank(message = "Pole nie może byc puste!")
     @Column(nullable = false)
-    @Pattern(regexp = "[a-z]+([ -][A-Z][a-z]+)?")
+//    @Pattern(regexp = "[a-z]+([ -][A-Z][a-z]+)?")
     private String city;
 
     @NotBlank(message = "Pole nie może byc puste!")
     @Column(nullable = false,unique = true)
-    @Pattern(regexp = "\\d{3} \\d{3} \\d{3}")
-    @Pattern(regexp = "\\d{9}")
+//    @Pattern(regexp = "\\d{3} \\d{3} \\d{3}")
+//    @Pattern(regexp = "\\d{9}")
     private String phoneNumber;
 
     @NotBlank(message = "Pole nie może byc puste!")
@@ -65,18 +66,18 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Pole nie może byc puste!")
     @Column(nullable = false)
-    @Pattern(regexp = "\\\\d+[A-Z]?\\\\\\\\\\\\d+[A-Z]?")
+//    @Pattern(regexp = "\\\\d+[A-Z]?\\\\\\\\\\\\d+[A-Z]?")
     private String numberOfStreet;
 
     @Min(1)
     @Column(nullable = false)
-    @NotNull(message = "Pole nie może byc puste")
+//    @NotNull(message = "Pole nie może byc puste")
     private Integer numberOfFlat;
 
     @NotBlank(message = "Pole nie może byc puste!")
     @Column(nullable = false)
     @Size(min=6,message = "Pole musi mieć co najmniej 6 znaków!")
-    @Pattern(regexp = "\"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$\"")
+//    @Pattern(regexp = "\"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$\"")
     private String password;
 
     @NotBlank(message = "Pole nie może byc puste!")
@@ -91,10 +92,10 @@ public class User implements UserDetails {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(nullable = false, updatable = false)
-    @NotBlank(message = "Pole nie może być puste!")
+    @NotNull(message = "Pole nie może być puste!")
     private LocalDate dateOfBirth;
 
-    @NotBlank(message = "Pole nie może byc puste!")
+//    @NotBlank(message = "Pole nie może byc puste!")
     private String resetPasswordToken;
 
     @Column(nullable = false,updatable = false)
@@ -105,11 +106,11 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Boolean enabled;
 
-    @Column(nullable = false)
-    @NotNull(message = "Pole nie może być puste!")
-    private Integer points;
+//    @Column(nullable = false)
+//    @NotNull(message = "Pole nie może być puste!")
+//    private Integer points;
     @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    @NotEmpty(message = "Pole nie może byc puste")
+//    @NotEmpty(message = "Pole nie może byc puste")
     @JoinTable(
             name = "USER_ROLES",
             joinColumns = @JoinColumn(
@@ -117,6 +118,16 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(
                     name = "roleID", referencedColumnName = "id"))
     private Collection<Role> roles;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Card card;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private Set<Contact> contact;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<FullOrder> orders;
+
 
 
     @Override
@@ -127,7 +138,12 @@ public class User implements UserDetails {
             authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
         }
         return authorities;
-        
+
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override

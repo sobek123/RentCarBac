@@ -8,7 +8,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,6 +19,5 @@ public class RoleDTO {
     @NotBlank(message = "Pole nie może być puste")
     private String name;
 
-    @NotEmpty
     private Collection< User > users;
 }

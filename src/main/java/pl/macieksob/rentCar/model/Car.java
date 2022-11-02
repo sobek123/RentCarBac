@@ -34,8 +34,8 @@ public class Car {
     @NotBlank(message = "Pole nie może byc puste")
     private String licensePlate;
     
-    @NotNull(message = "Pole nie może byc puste")
-    @OneToOne(cascade = CascadeType.ALL)
+//    @NotNull(message = "Pole nie może byc puste")
+    @Embedded
     private Prize prize;
     
     @NotNull(message = "Pole nie może byc puste")
@@ -47,7 +47,7 @@ public class Car {
     private Integer nm;
 
     @NotNull(message = "Pole nie może byc puste")
-    @Min(5)
+    @Min(3)
     @Max(50)
     private Double combustion;
 
@@ -66,7 +66,7 @@ public class Car {
     @NotNull(message = "Pole nie może byc puste")
     private Transmission transmission;
     
-
+    private String fault;
 
     @NotNull(message = "Pole nie może byc puste")
     @Enumerated(value = EnumType.STRING)
@@ -91,10 +91,10 @@ public class Car {
 //    @Min(200)
 //    @NotNull(message = "Pole nie może byc puste")
 //    private Integer deposit;
-
-    @ManyToMany(mappedBy = "cars")
-//    @NotEmpty(message = "Pole nie może byc puste")
-    private Set<Order> orders;
+//
+//    @ManyToMany(mappedBy = "cars")
+////    @NotEmpty(message = "Pole nie może byc puste")
+//    private Set<Order> orders;
 
 
 
@@ -104,6 +104,10 @@ public class Car {
     @Min(2)
     @NotNull(message = "Pole nie może byc puste")
     private Integer numberOfSeats;
+
+    @Min(0)
+    private Integer rentings;
+
 
     @Override
     public boolean equals(Object o) {
@@ -117,4 +121,6 @@ public class Car {
     public int hashCode() {
         return Objects.hash(brand);
     }
+
+
 }

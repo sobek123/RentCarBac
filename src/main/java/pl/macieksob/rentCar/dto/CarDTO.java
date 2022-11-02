@@ -10,11 +10,12 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class CarDTO {
 
 
@@ -42,8 +43,9 @@ public class CarDTO {
     @Max(50)
     private Double combustion;
 
-    @NotEmpty(message = "Pole nie może byc puste")
-    @OneToOne
+//    @NotEmpty(message = "Pole nie może byc puste")
+//    @OneToOne
+    @Embedded
     private Prize prize;
 
 
@@ -81,7 +83,7 @@ public class CarDTO {
     @NotNull(message = "Pole nie może byc puste")
     private Boolean taken;
 
-
+    private String fault;
 //    @ManyToMany(mappedBy = "cars")
 //    @NotEmpty(message = "Pole nie może byc puste")
 //    private Set<Order> orders;
@@ -96,7 +98,8 @@ public class CarDTO {
         CarDTO carDTO = (CarDTO) o;
         return brand.equals(carDTO.brand);
     }
-
+    @Min(0)
+    private Integer rentings;
     @Override
     public int hashCode() {
         return Objects.hash(brand);

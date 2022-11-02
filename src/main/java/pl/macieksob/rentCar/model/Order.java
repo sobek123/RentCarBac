@@ -1,10 +1,7 @@
 package pl.macieksob.rentCar.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -14,11 +11,13 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "ORDERS")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -38,29 +37,32 @@ public class Order {
     @Column(nullable = false)
     private LocalDate endDate;
 
-    @JsonProperty("start_date")
-    @NotNull(message = "Pole nie może byc puste")
-    @Column(nullable = false)
-    private LocalDateTime launchDate;
+//    @JsonProperty("start_date")
+//    @NotNull(message = "Pole nie może byc puste")
+//    @Column(nullable = false)
+//    private LocalDateTime launchDate;
 
     @NotNull(message = "Pole nie może byc puste")
     @Column(nullable = false)
-    private Place place;
+    private Place rentPlace;
 
     @NotNull(message = "Pole nie może byc puste")
     @Column(nullable = false)
-    private Integer days;
+    private Place backPlace;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ORDER_CARS",
-            joinColumns = @JoinColumn(name = "ORDER_ID", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "CAR_ID", referencedColumnName = "id")
-    )
-    @NotEmpty(message = "Pole nie może byc puste")
-    private Set<Car> cars;
 
-    @OneToOne
-    @NotEmpty(message = "Pole nie może byc puste")
-    private User user;
+    @OneToOne(cascade = CascadeType.MERGE)
+//    @NotEmpty(message = "Pole nie może byc puste")
+    private Car car;
+
+//    @ManyToOne
+////    @NotEmpty(message = "Pole nie może byc puste")
+//    private User user;
+
+    @OneToMany
+   private List<Additional> additional;
+
+
+    @NotNull(message = "Pole nie może byc puste")
+    private Integer prize;
 }

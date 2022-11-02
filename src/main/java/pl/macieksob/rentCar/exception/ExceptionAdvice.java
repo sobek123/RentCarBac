@@ -20,14 +20,14 @@ public class ExceptionAdvice {
         return exception.getMessage();
     }
 
-    @ExceptionHandler(OrderNotFoundException.class)
+    @ExceptionHandler(FullOrderNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String informationNotExistHandler(OrderNotFoundException exception) {
+    public String informationNotExistHandler(FullOrderNotFoundException exception) {
         return exception.getMessage();
     }
 
-    @ExceptionHandler(OrderDuplicateException.class)
-    public String orderDuplicateHandler(OrderDuplicateException exception) {
+    @ExceptionHandler(FullOrderDuplicateException.class)
+    public String orderDuplicateHandler(FullOrderDuplicateException exception) {
         return exception.getMessage();
     }
 

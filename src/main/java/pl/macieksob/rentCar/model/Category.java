@@ -7,7 +7,7 @@ import javax.persistence.Embedded;
 public enum Category {
 
     KOMFORTOWE,
-    SPORT,
+    SPORTOWE,
     EKONOMICZNE,
     EKSKLUZYWNE,
     SUV,
