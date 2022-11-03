@@ -122,8 +122,7 @@ public class RentCarApplication {
 			additionalService.addAdditional(new AdditionalDTO(9L, "Mycie samochodu", BigDecimal.valueOf(100)));
 			additionalService.addAdditional(new AdditionalDTO(10L, "Sprzątanie samochodu w środku", BigDecimal.valueOf(100)));
 			additionalService.addAdditional(new AdditionalDTO(11L, "Ładowanie auta elektrycznego", BigDecimal.valueOf(10)));
-			userService.addUser(new UserDTO(1L, "Maciek", "Sobolewski", "macieksob25@gmail.com", "15-354", "Bialystok", "514 546 610", "Pogodna", "11", 32, "Sobolek2017?", "67328302379",
-					LocalDateTime.now(), LocalDate.of(2000, 12, 12), "fgdgdfg", "dfgdfgdf", true, new Card(),0));
+			
 			userService.addUser(new UserDTO(2L, "Diana", "Kolska", "dianakol@gmail.com", "15-546", "Bialystok", "647 676 888", "Waryńskiego", "4", 22, "Dianakol1234!", "00989889984",
 					LocalDateTime.now(), LocalDate.of(1998, 3, 11), "fgdgdfg", "dfgdfgdf", true, new Card(),0));
 //			orderService.addOrder(new OrderDTO(1L, LocalDate.of(2022,6,15),LocalDate.of(2022,7,8),32,Set.of(new CarDTO(42L, "Corolla", "BI6734T", 280, 345, 7.7, new Prize(BigDecimal.valueOf(89), BigDecimal.valueOf(129), BigDecimal.valueOf(199), BigDecimal.valueOf(219), BigDecimal.valueOf(259), BigDecimal.valueOf(269), BigDecimal.valueOf(300))
